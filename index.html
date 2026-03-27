@@ -7,145 +7,155 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* =========================================
-           CSS: DESIGN GRADIENTE, EFEITOS E ANIMAÇÕES
+           VARIÁVEIS DE CORES (TEMA ESCURO E CLARO)
            ========================================= */
         :root {
-            --bg-deep: #0c0f2b; /* Azul Meia Noite Profundo */
-            --gradient-primary: linear-gradient(135deg, #2563eb, #7c3aed); /* Azul Elétrico -> Roxo */
-            --gradient-hover: linear-gradient(135deg, #1d4ed8, #6d28d9);
-            --gradient-success: linear-gradient(90deg, #10b981, #34d399); /* Verde -> Menta */
-            --glass-bg: rgba(255, 255, 255, 0.03); /* Vidro Fumado Muito Transparente */
-            --glass-border: rgba(255, 255, 255, 0.05);
-            --text-main: #e2e8f0;
+            /* TEMA ESCURO (Padrão) */
+            --bg-base: #0c0f2b;
+            --panel-bg: rgba(255, 255, 255, 0.03);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --text-main: #f8fafc;
             --text-muted: #94a3b8;
+            --input-bg: rgba(0, 0, 0, 0.2);
+            --card-bg: rgba(255, 255, 255, 0.02);
+            --card-hover: rgba(255, 255, 255, 0.08);
+            --sidebar-bg: #0f172a;
+            --modal-bg: #0c0f2b;
+            
+            /* GRADIENTES (Mantêm-se iguais nos dois temas para não perder a identidade) */
+            --gradient-primary: linear-gradient(135deg, #2563eb, #7c3aed);
+            --gradient-hover: linear-gradient(135deg, #1d4ed8, #6d28d9);
+            --gradient-success: linear-gradient(90deg, #10b981, #34d399);
         }
 
-        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: var(--bg-deep); min-height: 100vh; margin: 0; padding-top: 70px; color: var(--text-main); overflow-x: hidden; }
+        body.light-mode {
+            /* TEMA CLARO */
+            --bg-base: #f1f5f9;
+            --panel-bg: #ffffff;
+            --border-color: #cbd5e1;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --input-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --card-hover: #e2e8f0;
+            --sidebar-bg: #ffffff;
+            --modal-bg: #ffffff;
+        }
+
+        /* =========================================
+           CSS GERAL E ANIMAÇÕES
+           ========================================= */
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-base); min-height: 100vh; margin: 0; padding-top: 70px; color: var(--text-main); overflow-x: hidden; transition: background-color 0.4s ease, color 0.4s ease; }
         
-        /* ANIMAÇÃO DE ENTRADA DA PÁGINA (TELA INTEIRA SUBINDO) */
-        @keyframes slideUpFadePage {
-            from { opacity: 0; transform: translateY(40px) scale(0.98); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        /* ANIMAÇÃO DE ENTRADA DOS CARDS (EFEITO ESCADA) */
-        @keyframes popInCard {
-            from { opacity: 0; transform: scale(0.8) translateY(20px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
-        }
+        @keyframes slideUpFadePage { from { opacity: 0; transform: translateY(40px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        @keyframes popInCard { from { opacity: 0; transform: scale(0.8) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
 
         /* Topbar Clean e Vibrante */
         .topbar { position: fixed; top: 0; left: 0; width: 100%; background: var(--gradient-primary); color: white; padding: 12px 20px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; z-index: 900; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
         .topbar-esquerda { display: flex; align-items: center; }
+        .topbar-direita { display: flex; align-items: center; gap: 10px; }
+        
         .btn-menu { background: transparent; color: white; border: none; font-size: 24px; cursor: pointer; margin-right: 15px; width: auto; padding: 0 10px; transition: transform 0.2s; }
         .btn-menu:hover { transform: rotate(90deg); }
         .topbar h1 { margin: 0; font-size: 19px; font-weight: 600; letter-spacing: 0.5px; }
         
-        .btn-topo-direito { background: rgba(255, 255, 255, 0.1); color: white; border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; padding: 8px 18px; cursor: pointer; font-weight: 500; transition: all 0.3s; font-size: 13px; backdrop-filter: blur(5px); }
-        .btn-topo-direito:hover { background: rgba(255, 255, 255, 0.2); transform: translateY(-2px); box-shadow: 0 5px 10px rgba(0,0,0,0.2); }
+        /* Botão Tema e Botão Amostras no Topo */
+        .btn-tema { background: transparent; border: none; font-size: 20px; cursor: pointer; color: white; transition: transform 0.3s; padding: 5px; }
+        .btn-tema:hover { transform: scale(1.1); }
+        .btn-topo-direito { background: rgba(255, 255, 255, 0.15); color: white; border: 1px solid rgba(255,255,255,0.3); border-radius: 6px; padding: 8px 18px; cursor: pointer; font-weight: 500; transition: all 0.3s; font-size: 13px; backdrop-filter: blur(5px); }
+        .btn-topo-direito:hover { background: rgba(255, 255, 255, 0.25); transform: translateY(-2px); box-shadow: 0 5px 10px rgba(0,0,0,0.2); }
 
-        /* Container Slim com Glassmorfismo */
+        /* Container e Seções */
         .container { max-width: 950px; margin: 20px auto; padding: 0 20px; }
-        .secao { background: var(--glass-bg); padding: 30px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 1px solid var(--glass-border); margin-bottom: 25px; backdrop-filter: blur(10px); }
+        .secao { background: var(--panel-bg); padding: 30px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid var(--border-color); margin-bottom: 25px; backdrop-filter: blur(10px); transition: all 0.4s ease; }
         
-        h2 { color: white; font-weight: 600; font-size: 19px; border-bottom: 1px solid var(--glass-border); padding-bottom: 12px; margin-top: 0; margin-bottom: 25px; }
-        h3 { font-size: 16px; margin-bottom: 12px; color: var(--text-main); font-weight: 600; }
+        h2 { color: var(--text-main); font-weight: 600; font-size: 19px; border-bottom: 1px solid var(--border-color); padding-bottom: 12px; margin-top: 0; margin-bottom: 25px; transition: color 0.4s ease; }
+        h3 { font-size: 16px; margin-bottom: 12px; color: var(--text-main); font-weight: 600; transition: color 0.4s ease; }
         
         .form-group { display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 20px; }
         
-        /* NOVOS INPUTS COM EFEITOS DE GLOW E RÓTULO FLUTUANTE */
+        /* Inputs com Efeitos de Glow e Rótulo Flutuante */
         .input-wrapper { position: relative; flex: 1; min-width: 150px; }
-        .input-wrapper input, .input-wrapper select { width: 100%; box-sizing: border-box; padding: 15px 15px 5px 15px; /* Mais espaço no topo */ border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; font-size: 14px; outline: none; transition: all 0.3s ease; background: rgba(0,0,0,0.2); color: white; height: 50px; }
+        .input-wrapper input, .input-wrapper select { width: 100%; box-sizing: border-box; padding: 15px 15px 5px 15px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 14px; outline: none; transition: all 0.3s ease; background: var(--input-bg); color: var(--text-main); height: 50px; }
+        
+        /* CORREÇÃO DO BUG DA LISTA SELECT */
+        select option { background-color: var(--sidebar-bg); color: var(--text-main); }
         
         .input-wrapper label { position: absolute; top: 15px; left: 15px; color: var(--text-muted); transition: all 0.3s ease; pointer-events: none; font-size: 14px; }
+        .input-wrapper input:focus ~ label, .input-wrapper input:not(:placeholder-shown) ~ label, .input-wrapper select:focus ~ label, .input-wrapper select:not([value=""]) ~ label { top: 5px; left: 10px; font-size: 11px; color: #7c3aed; font-weight: bold; }
+        .input-wrapper input:focus, .input-wrapper select:focus { border-color: #7c3aed; background: var(--input-bg); box-shadow: 0 0 10px rgba(124, 58, 237, 0.2); }
+        .erro-input { border-color: #ef4444 !important; box-shadow: 0 0 10px rgba(239, 68, 68, 0.3) !important; }
         
-        /* Efeito de Rótulo Flutuante (sobe ao focar ou ter texto) */
-        .input-wrapper input:focus ~ label, .input-wrapper input:not(:placeholder-shown) ~ label, .input-wrapper select:focus ~ label, .input-wrapper select:not([value=""]) ~ label { top: 5px; left: 10px; font-size: 11px; color: #a78bfa; font-weight: bold; }
-        
-        /* Efeito Glow no Foco */
-        .input-wrapper input:focus, .input-wrapper select:focus { border-color: #7c3aed; background: rgba(124, 58, 237, 0.05); box-shadow: 0 0 10px rgba(124, 58, 237, 0.4); }
-        
-        .erro-input { border-color: #ef4444 !important; background-color: rgba(239, 68, 68, 0.05) !important; box-shadow: 0 0 10px rgba(239, 68, 68, 0.4) !important; }
-        
-        /* Área de Drag and Drop Neumórfica */
-        .drop-zone { width: 100%; padding: 25px; border: 2px dashed rgba(255,255,255,0.1); border-radius: 10px; background-color: rgba(0,0,0,0.1); text-align: center; color: var(--text-muted); cursor: pointer; transition: all 0.3s; box-sizing: border-box; font-size: 14px; margin-bottom: 20px; font-weight: 500; }
+        /* Área de Drag and Drop */
+        .drop-zone { width: 100%; padding: 25px; border: 2px dashed var(--border-color); border-radius: 10px; background-color: var(--input-bg); text-align: center; color: var(--text-muted); cursor: pointer; transition: all 0.3s; box-sizing: border-box; font-size: 14px; margin-bottom: 20px; font-weight: 500; }
         .drop-zone.dragover { background-color: rgba(37, 99, 235, 0.05); border-color: #3b82f6; color: #3b82f6; }
         .input-escondido { display: none; }
         
-        /* BOTÕES GRADIENTES COM EFEITO DE LEVITAÇÃO */
-        button { padding: 14px 22px; background: var(--gradient-primary); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 15px; transition: all 0.3s ease; width: 100%; margin-top: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); position: relative; overflow: hidden; }
-        button:hover { background: var(--gradient-hover); transform: translateY(-3px); box-shadow: 0 8px 20px rgba(124, 58, 237, 0.5); }
+        /* BOTÕES */
+        button { padding: 14px 22px; background: var(--gradient-primary); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 15px; transition: all 0.3s ease; width: 100%; margin-top: 8px; box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2); position: relative; overflow: hidden; }
+        button:hover { background: var(--gradient-hover); transform: translateY(-3px); box-shadow: 0 8px 20px rgba(124, 58, 237, 0.4); }
         button:active { transform: translateY(-1px); }
 
         .botoes-filtro { display: flex; gap: 15px; width: 100%; margin-top: 15px; }
         .botoes-filtro button { margin-top: 0; width: auto; flex: 1; }
-        button.btn-secundario { background: #475569; }
-        button.btn-secundario:hover { background: #334155; box-shadow: 0 8px 20px rgba(51, 65, 85, 0.4); }
-        button.btn-editar-item { background: #f59e0b; color: white; margin-top: 0; width: auto; padding: 6px 12px; font-size: 12px; }
-        button.btn-editar-item:hover { background: #d97706; box-shadow: 0 4px 10px rgba(217, 119, 6, 0.4); }
+        button.btn-secundario { background: #64748b; box-shadow: none; }
+        button.btn-secundario:hover { background: #475569; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        button.btn-editar-item { background: #f59e0b; color: white; margin-top: 0; width: auto; padding: 6px 12px; font-size: 12px; box-shadow: none; }
+        button.btn-editar-item:hover { background: #d97706; box-shadow: 0 4px 10px rgba(217, 119, 6, 0.3); }
 
-        /* Cartões Vidrados (Glassmorfismo) */
+        /* Cartões */
         .cards-container { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 18px; }
-        .card { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--glass-border); border-radius: 10px; padding: 22px; width: 100%; max-width: 260px; transition: all 0.3s ease; display: flex; flex-direction: column; position: relative; backdrop-filter: blur(5px); opacity: 0; /* Começa invisível para animação JS */ animation: popInCard 0.5s ease-out forwards; }
+        .card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 10px; padding: 22px; width: 100%; max-width: 260px; transition: all 0.3s ease; display: flex; flex-direction: column; position: relative; backdrop-filter: blur(5px); opacity: 0; animation: popInCard 0.5s ease-out forwards; }
         .card-largo { max-width: 100%; } 
-        .card:hover { transform: translateY(-5px); border-color: rgba(255,255,255,0.1); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .card:hover { transform: translateY(-5px); border-color: #3b82f6; box-shadow: 0 10px 30px rgba(0,0,0,0.1); background: var(--card-hover); }
         
-        .card h3 { margin-top: 0; color: white; font-size: 17px; border-bottom: 1px solid var(--glass-border); padding-bottom: 10px; margin-bottom: 15px; padding-right: 30px; }
+        .card h3 { margin-top: 0; color: var(--text-main); font-size: 17px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-bottom: 15px; padding-right: 30px; }
         .card p { margin: 8px 0; font-size: 13px; color: var(--text-muted); }
         
-        /* Botão do Card Flat-Neumórfico */
-        .btn-card { display: block; width: 100%; margin-top: 12px; text-align: center; background: rgba(255,255,255,0.05); color: var(--text-main); border: 1px solid var(--glass-border); padding: 10px 0; font-size: 13px; border-radius: 6px; text-decoration: none; font-weight: 500; cursor: pointer; transition: all 0.3s; }
-        .btn-card:hover { background: rgba(255,255,255,0.1); color: white; }
-        .btn-card-azul { background: rgba(37, 99, 235, 0.08); color: #3b82f6; border-color: rgba(59, 130, 246, 0.2); }
-        .btn-card-azul:hover { background: rgba(37, 99, 235, 0.15); }
+        .btn-card { display: block; width: 100%; margin-top: 12px; text-align: center; background: var(--input-bg); color: var(--text-main); border: 1px solid var(--border-color); padding: 10px 0; font-size: 13px; border-radius: 6px; text-decoration: none; font-weight: 500; cursor: pointer; transition: all 0.3s; box-shadow: none; }
+        .btn-card:hover { background: rgba(37, 99, 235, 0.1); color: #3b82f6; border-color: #3b82f6; transform: translateY(-2px); }
+        .btn-card-azul { background: rgba(37, 99, 235, 0.1); color: #3b82f6; border-color: rgba(59, 130, 246, 0.3); }
 
-        /* LIXEIRINHA NO CANTO SUPERIOR DIREITO */
-        .btn-lixeira { position: absolute; top: 18px; right: 18px; background: transparent; border: none; font-size: 18px; cursor: pointer; color: #475569; width: auto; padding: 0; margin: 0; transition: color 0.3s, transform 0.2s; box-shadow: none; }
+        .btn-lixeira { position: absolute; top: 18px; right: 18px; background: transparent; border: none; font-size: 18px; cursor: pointer; color: var(--text-muted); width: auto; padding: 0; margin: 0; transition: color 0.3s, transform 0.2s; box-shadow: none; }
         .btn-lixeira:hover { color: #ef4444; background: transparent; transform: scale(1.2); }
 
-        /* Tabela Amostras Slim e Checklist Moderno */
-        .lista-produtos { background: rgba(0,0,0,0.1); padding: 18px; border-radius: 10px; margin-bottom: 20px; border: 1px solid var(--glass-border); }
-        .item-produto { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--glass-border); font-size: 13px; }
+        /* Tabela Amostras */
+        .lista-produtos { background: var(--input-bg); padding: 18px; border-radius: 10px; margin-bottom: 20px; border: 1px solid var(--border-color); transition: all 0.4s; }
+        .item-produto { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border-color); font-size: 13px; }
         .item-produto:last-child { border-bottom: none; }
         
         .tabela-amostras { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
-        .tabela-amostras th, .tabela-amostras td { border-bottom: 1px solid var(--glass-border); padding: 12px; text-align: left; vertical-align: middle; }
-        .tabela-amostras th { color: var(--text-muted); font-weight: 500; font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; }
+        .tabela-amostras th, .tabela-amostras td { border-bottom: 1px solid var(--border-color); padding: 12px; text-align: left; vertical-align: middle; }
+        .tabela-amostras th { color: var(--text-muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; }
+        .tabela-amostras strong { color: var(--text-main); font-size: 14px; }
+        .tabela-amostras small, .tabela-amostras label { color: var(--text-muted); font-size: 12px; }
         
-        /* Checklist Moderno como Switch */
         .checklist-container { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-main); }
         .checklist-container input[type="checkbox"] { width: 18px; height: 18px; cursor: pointer; accent-color: #10b981; margin: 0; }
         .data-recebido { font-size: 12px; color: white; font-weight: 600; background: var(--gradient-success); padding: 4px 10px; border-radius: 20px; display: inline-block; margin-left: 5px; box-shadow: 0 2px 5px rgba(16, 185, 129, 0.2); }
 
-        /* Menu Lateral Neumórfico */
-        .sidebar { position: fixed; top: 0; left: -320px; width: 300px; height: 100%; background: #ffffff; box-shadow: 5px 0 20px rgba(0,0,0,0.3); z-index: 1000; transition: left 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); overflow-y: auto; padding: 25px; box-sizing: border-box; }
+        /* Menu Lateral */
+        .sidebar { position: fixed; top: 0; left: -320px; width: 300px; height: 100%; background: var(--sidebar-bg); box-shadow: 5px 0 20px rgba(0,0,0,0.1); z-index: 1000; transition: left 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); overflow-y: auto; padding: 25px; box-sizing: border-box; border-right: 1px solid var(--border-color); }
         .sidebar.aberto { left: 0; }
         .sidebar-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 999; backdrop-filter: blur(4px); transition: opacity 0.3s; }
-        .sidebar h3 { color: #64748b; text-transform: uppercase; font-size: 12px; letter-spacing: 1px; margin-top: 30px; border-bottom: none; font-weight: bold; }
+        .sidebar h3 { color: var(--text-muted); text-transform: uppercase; font-size: 12px; letter-spacing: 1px; margin-top: 30px; border-bottom: none; font-weight: bold; }
         .sidebar h3:first-child { margin-top: 10px; }
         .sidebar ul { list-style: none; padding: 0; margin: 0; }
-        .sidebar ul li a, .sidebar ul li button.link-menu { color: #334155; text-decoration: none; font-weight: 500; font-size: 14px; display: block; padding: 12px 15px; background: transparent; border-radius: 8px; border: none; width: 100%; text-align: left; cursor: pointer; transition: all 0.2s; }
-        .sidebar ul li a:hover, .sidebar ul li button.link-menu:hover { background: #f1f5f9; color: #1d4ed8; }
-        .btn-fechar-menu { background: #fee2e2; color: #ef4444; margin-bottom: 30px; border: 1px solid rgba(239, 68, 68, 0.1); }
-        .btn-fechar-menu:hover { background: #fecaca; transform: none; box-shadow: none; }
+        .sidebar ul li a, .sidebar ul li button.link-menu { color: var(--text-main); text-decoration: none; font-weight: 500; font-size: 14px; display: block; padding: 12px 15px; background: transparent; border-radius: 8px; border: none; width: 100%; text-align: left; cursor: pointer; transition: all 0.2s; }
+        .sidebar ul li a:hover, .sidebar ul li button.link-menu:hover { background: var(--input-bg); color: #3b82f6; }
+        .btn-fechar-menu { background: rgba(239, 68, 68, 0.1); color: #ef4444; margin-bottom: 30px; border: 1px solid rgba(239, 68, 68, 0.2); box-shadow: none; }
+        .btn-fechar-menu:hover { background: rgba(239, 68, 68, 0.2); transform: none; box-shadow: none; }
         
         .tela-app { display: none; }
-        /* APLICA A ANIMAÇÃO QUANDO A TELA FICA ATIVA */
         .tela-ativa { display: block; animation: slideUpFadePage 0.6s cubic-bezier(0.23, 1, 0.320, 1) forwards; }
         
-        /* Modal Preview Moderno */
+        /* Modal Preview */
         .modal-fundo { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 1100; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; backdrop-filter: blur(5px); }
-        .modal-conteudo { background: white; border-radius: 12px; width: 100%; max-width: 950px; height: 90vh; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); }
-        .modal-cabecalho { padding: 18px 22px; background: #ffffff; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; }
-        .btn-fechar { background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 13px; width: auto; margin: 0; font-weight: 500; }
-        .btn-fechar:hover { background: #e2e8f0; }
-        iframe { width: 100%; flex: 1; border: none; background: #f8fafc; }
-
-        /* Estilo da Tabela Interna das Amostras (Melhorado para Design Slim) */
-        .tabela-amostras strong { color: white; font-size: 14px; }
-        .tabela-amostras small { color: var(--text-muted); font-size: 12px; }
-        .tabela-amostras label { color: var(--text-muted); font-size: 13px; }
-        .tabela-amostras input[type="checkbox"]:checked ~ label { color: white; font-weight: 500; }
+        .modal-conteudo { background: var(--modal-bg); border-radius: 12px; width: 100%; max-width: 950px; height: 90vh; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); border: 1px solid var(--border-color); }
+        .modal-cabecalho { padding: 18px 22px; background: var(--panel-bg); border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; }
+        .btn-fechar { background: var(--input-bg); color: var(--text-main); border: 1px solid var(--border-color); padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 13px; width: auto; margin: 0; font-weight: 500; box-shadow: none; }
+        .btn-fechar:hover { background: rgba(239, 68, 68, 0.1); color: #ef4444; border-color: rgba(239, 68, 68, 0.3); }
+        iframe { width: 100%; flex: 1; border: none; background: #e2e8f0; }
     </style>
 </head>
 <body>
@@ -155,7 +165,10 @@
         <button class="btn-menu" onclick="toggleMenu()">☰</button>
         <h1 id="tituloTopo">Controle de Relatórios</h1>
     </div>
-    <button class="btn-topo-direito" onclick="mudarTela('telaAmostras')">📦 Amostras</button>
+    <div class="topbar-direita">
+        <button id="btnTema" class="btn-tema" onclick="alternarTema()" title="Mudar Tema">☀️</button>
+        <button class="btn-topo-direito" onclick="mudarTela('telaAmostras')">📦 Amostras</button>
+    </div>
 </div>
 
 <div class="sidebar-overlay" id="overlayMenu" onclick="toggleMenu()"></div>
@@ -182,22 +195,10 @@
     <div class="secao">
         <h2>Registrar Novo Relatório</h2>
         <div class="form-group">
-            <div class="input-wrapper">
-                <input type="text" id="regProcesso" placeholder=" ">
-                <label for="regProcesso">Nº de Processo *</label>
-            </div>
-            <div class="input-wrapper">
-                <input type="text" id="regCliente" placeholder=" ">
-                <label for="regCliente">Nome do Cliente *</label>
-            </div>
-            <div class="input-wrapper">
-                <input type="text" id="regProduto" placeholder=" ">
-                <label for="regProduto">Produto *</label>
-            </div>
-            <div class="input-wrapper">
-                <input type="text" id="regModelo" placeholder=" ">
-                <label for="regModelo">Modelo *</label>
-            </div>
+            <div class="input-wrapper"><input type="text" id="regProcesso" placeholder=" "><label for="regProcesso">Nº de Processo *</label></div>
+            <div class="input-wrapper"><input type="text" id="regCliente" placeholder=" "><label for="regCliente">Nome do Cliente *</label></div>
+            <div class="input-wrapper"><input type="text" id="regProduto" placeholder=" "><label for="regProduto">Produto *</label></div>
+            <div class="input-wrapper"><input type="text" id="regModelo" placeholder=" "><label for="regModelo">Modelo *</label></div>
             <div class="input-wrapper">
                 <select id="regClasse">
                     <option value="" disabled selected hidden></option>
@@ -207,14 +208,8 @@
                 </select>
                 <label for="regClasse">Classe de Isolação *</label>
             </div>
-            <div class="input-wrapper">
-                <input type="text" id="regTensao" placeholder=" ">
-                <label for="regTensao">Tensão *</label>
-            </div>
-            <div class="input-wrapper">
-                <input type="text" id="regPotencia" placeholder=" ">
-                <label for="regPotencia">Potência *</label>
-            </div>
+            <div class="input-wrapper"><input type="text" id="regTensao" placeholder=" "><label for="regTensao">Tensão *</label></div>
+            <div class="input-wrapper"><input type="text" id="regPotencia" placeholder=" "><label for="regPotencia">Potência *</label></div>
         </div>
         <div class="drop-zone" id="areaDropRel">
             <span id="textoDropRel">📄 Arraste e solte o relatório aqui</span>
@@ -281,11 +276,11 @@
         <div class="lista-produtos">
             <h3>Itens da Solicitação</h3>
             <div class="form-group" style="margin-bottom: 10px; gap: 8px;">
-                <div class="input-wrapper" style="flex: 2;"><input type="text" id="amostraProdNome" placeholder=" "><label for="amostraProdNome">Produto *</label></div>
-                <div class="input-wrapper" style="flex: 1;"><input type="text" id="amostraProdTensao" placeholder=" "><label for="amostraProdTensao">Tensão *</label></div>
-                <div class="input-wrapper" style="flex: 1;"><input type="number" id="amostraProdQtd" placeholder=" "><label for="amostraProdQtd">Qtd *</label></div>
-                <div class="input-wrapper" style="flex: 2;"><input type="text" id="amostraProdLink" placeholder=" "><label for="amostraProdLink">Link (Opcional)</label></div>
-                <button id="btnAdicionarProduto" onclick="adicionarProdutoTemp()" style="flex: 1; min-width: 100px; margin-top:0;">+ Add</button>
+                <div class="input-wrapper" style="flex: 2; min-width: 100px;"><input type="text" id="amostraProdNome" placeholder=" "><label for="amostraProdNome">Produto *</label></div>
+                <div class="input-wrapper" style="flex: 1; min-width: 70px;"><input type="text" id="amostraProdTensao" placeholder=" "><label for="amostraProdTensao">Tensão *</label></div>
+                <div class="input-wrapper" style="flex: 1; min-width: 60px;"><input type="number" id="amostraProdQtd" placeholder=" "><label for="amostraProdQtd">Qtd *</label></div>
+                <div class="input-wrapper" style="flex: 2; min-width: 100px;"><input type="text" id="amostraProdLink" placeholder=" "><label for="amostraProdLink">Link (Opcional)</label></div>
+                <button id="btnAdicionarProduto" onclick="adicionarProdutoTemp()" style="flex: 1; min-width: 90px; margin-top:0;">+ Add</button>
             </div>
             <div id="listaProdutosTemp"><p style="font-size: 13px; color: var(--text-muted); font-style: italic;">Nenhum produto adicionado.</p></div>
         </div>
@@ -313,7 +308,7 @@
 <div id="meuModal" class="modal-fundo">
     <div class="modal-conteudo">
         <div class="modal-cabecalho">
-            <h3 id="tituloModal" style="margin:0; color:#334155;">Visualização</h3>
+            <h3 id="tituloModal" style="margin:0; color:var(--text-main);">Visualização</h3>
             <button class="btn-fechar" onclick="fecharPreview()">✕ Fechar</button>
         </div>
         <iframe id="telaPreview" src=""></iframe>
@@ -348,17 +343,26 @@
     let produtosTemp = [];
     let idProdutoEmEdicao = null;
 
-    // NAVEGAÇÃO E UTLIDADES
+    // LÓGICA DE TROCA DE TEMA (CLARO/ESCURO)
+    window.alternarTema = function() {
+        document.body.classList.toggle('light-mode');
+        const isLight = document.body.classList.contains('light-mode');
+        document.getElementById('btnTema').innerText = isLight ? '🌙' : '☀️';
+        localStorage.setItem('temaPreferencia', isLight ? 'claro' : 'escuro');
+    }
+    // Carrega a preferência ao iniciar
+    if (localStorage.getItem('temaPreferencia') === 'claro') {
+        document.body.classList.add('light-mode');
+        document.getElementById('btnTema').innerText = '🌙';
+    }
+
+    // NAVEGAÇÃO
     window.toggleMenu = function() {
         const menu = document.getElementById('menuLateral');
         const overlay = document.getElementById('overlayMenu');
         menu.classList.toggle('aberto');
         overlay.style.display = menu.classList.contains('aberto') ? 'block' : 'none';
-        if(menu.classList.contains('aberto')) {
-            overlay.style.opacity = '1';
-        } else {
-            overlay.style.opacity = '0';
-        }
+        overlay.style.opacity = menu.classList.contains('aberto') ? '1' : '0';
     }
 
     window.mudarTela = function(idTela) {
@@ -375,10 +379,10 @@
     function ativarDragAndDrop(idArea, idInput, idTexto) {
         const area = document.getElementById(idArea); const input = document.getElementById(idInput); const texto = document.getElementById(idTexto);
         area.addEventListener('click', () => input.click());
-        input.addEventListener('change', () => { if (input.files.length > 0) { texto.innerText = "✅ " + input.files[0].name; area.style.borderColor = "#16a34a"; area.style.backgroundColor = "rgba(16, 185, 129, 0.1)"; area.style.color = "#10b981"; } });
+        input.addEventListener('change', () => { if (input.files.length > 0) { texto.innerText = "✅ " + input.files[0].name; area.style.borderColor = "#10b981"; area.style.color = "#10b981"; } });
         area.addEventListener('dragover', (e) => { e.preventDefault(); area.classList.add('dragover'); });
         area.addEventListener('dragleave', () => area.classList.remove('dragover'));
-        area.addEventListener('drop', (e) => { e.preventDefault(); area.classList.remove('dragover'); if (e.dataTransfer.files.length > 0) { input.files = e.dataTransfer.files; texto.innerText = "✅ " + input.files[0].name; area.style.borderColor = "#16a34a"; area.style.backgroundColor = "rgba(16, 185, 129, 0.1)"; area.style.color = "#10b981"; } });
+        area.addEventListener('drop', (e) => { e.preventDefault(); area.classList.remove('dragover'); if (e.dataTransfer.files.length > 0) { input.files = e.dataTransfer.files; texto.innerText = "✅ " + input.files[0].name; area.style.borderColor = "#10b981"; area.style.color = "#10b981"; } });
     }
     ativarDragAndDrop('areaDropRel', 'regArquivoRel', 'textoDropRel');
     ativarDragAndDrop('areaDropLab', 'regArquivoLab', 'textoDropLab');
@@ -388,7 +392,6 @@
         listaDeIDs.forEach(id => { const el = document.getElementById(id); if (el.value.trim() === "") { el.classList.add('erro-input'); tudoValido = false; } else { el.classList.remove('erro-input'); } });
         return tudoValido;
     }
-    // Remove erro ao digitar
     document.querySelectorAll('input, select').forEach(c => c.addEventListener('input', function() { if (this.value.trim() !== "") this.classList.remove('erro-input'); }));
 
     async function carregarTudo() {
@@ -411,7 +414,7 @@
             if (arquivo) { const arquivoRef = ref(storage, 'relatorios/' + Date.now() + '_' + arquivo.name); await uploadBytes(arquivoRef, arquivo); dados.arquivoUrl = await getDownloadURL(arquivoRef); dados.arquivoNome = arquivo.name; }
             await addDoc(collection(db, "relatorios"), dados); alert("Salvo!");
             document.querySelectorAll('#telaRelatorios .form-group input').forEach(i => i.value = ''); document.getElementById('regClasse').value = ''; carregarTudo();
-            document.getElementById('textoDropRel').innerText = "📄 Arraste e solte o relatório aqui"; document.getElementById('areaDropRel').style.borderColor = "rgba(255,255,255,0.1)"; document.getElementById('areaDropRel').style.backgroundColor = "rgba(0,0,0,0.1)"; document.getElementById('areaDropRel').style.color = "var(--text-muted)"; document.getElementById('regArquivoRel').value = "";
+            document.getElementById('textoDropRel').innerText = "📄 Arraste e solte o relatório aqui"; document.getElementById('areaDropRel').style.borderColor = "var(--border-color)"; document.getElementById('areaDropRel').style.color = "var(--text-muted)"; document.getElementById('regArquivoRel').value = "";
         } catch(e) { alert("Erro ao salvar."); } finally { btn.innerText = "Salvar Relatório"; btn.disabled = false; }
     }
 
@@ -420,7 +423,6 @@
         if (lista.length === 0) { area.innerHTML = '<p style="color:var(--text-muted); font-size:14px; font-style:italic;">Nenhum registo.</p>'; return; }
         lista.forEach((item, index) => {
             let btnAnexo = item.arquivoUrl ? `<button class="btn-card btn-card-azul" onclick="abrirPreview('${item.arquivoUrl}', '${item.processo}')">📄 Ver Anexo</button>` : ``;
-            // Aplicando o atraso na animação no JS
             area.innerHTML += `
                 <div class="card" style="animation-delay: ${index * 0.08}s">
                     <button class="btn-lixeira" onclick="apagarRelatorio('${item.id}')" title="Excluir">🗑️</button>
@@ -485,10 +487,10 @@
         const lab = bancoAcreditacoes.find(i => i.id === id);
         if(lab) { idLabEmEdicao = id; document.getElementById('regLabNome').value = lab.nome; document.getElementById('regLabLink').value = lab.link || ""; document.getElementById('tituloFormLab').innerText = "A Editar: " + lab.nome; document.getElementById('btnSalvarLab').innerText = "Atualizar"; document.getElementById('btnCancelarEdicao').style.display = "block"; window.scrollTo({ top: 0, behavior: 'smooth' }); }
     }
-    window.cancelarEdicaoLab = function() { idLabEmEdicao = null; document.getElementById('regLabNome').value = ''; document.getElementById('regLabLink').value = ''; document.getElementById('regArquivoLab').value = ''; document.getElementById('textoDropLab').innerText = "📁 Arraste e solte o certificado aqui"; document.getElementById('areaDropLab').style.borderColor = "rgba(255,255,255,0.1)"; document.getElementById('areaDropLab').style.backgroundColor = "rgba(0,0,0,0.1)"; document.getElementById('areaDropLab').style.color = "var(--text-muted)"; document.getElementById('tituloFormLab').innerText = "Cadastrar Nova Acreditação"; document.getElementById('btnSalvarLab').innerText = "Salvar Acreditação"; document.getElementById('btnCancelarEdicao').style.display = "none"; }
+    window.cancelarEdicaoLab = function() { idLabEmEdicao = null; document.getElementById('regLabNome').value = ''; document.getElementById('regLabLink').value = ''; document.getElementById('regArquivoLab').value = ''; document.getElementById('textoDropLab').innerText = "📁 Arraste e solte o certificado aqui"; document.getElementById('areaDropLab').style.borderColor = "var(--border-color)"; document.getElementById('areaDropLab').style.color = "var(--text-muted)"; document.getElementById('tituloFormLab').innerText = "Cadastrar Nova Acreditação"; document.getElementById('btnSalvarLab').innerText = "Salvar Acreditação"; document.getElementById('btnCancelarEdicao').style.display = "none"; }
 
     // =========================================
-    // AMOSTRAS (CHECKLIST E BUSCA)
+    // AMOSTRAS
     // =========================================
     window.adicionarProdutoTemp = function() {
         const nome = document.getElementById('amostraProdNome').value.trim();
@@ -519,7 +521,7 @@
         if (produtosTemp.length === 0) { div.innerHTML = '<p style="font-size: 13px; color: var(--text-muted); font-style: italic;">Nenhum produto adicionado.</p>'; return; }
         produtosTemp.forEach(p => div.innerHTML += `
             <div class="item-produto">
-                <span><strong>${p.qtd}x ${p.nome}</strong> (${p.tensao})</span>
+                <span><strong style="color:var(--text-main);">${p.qtd}x ${p.nome}</strong> (${p.tensao})</span>
                 <div>
                     <button class="btn-editar-item" onclick="editarProdutoTemp(${p.idProd})">✏️</button>
                     <button style="background:transparent; color:#ef4444; border:none; padding:5px 10px; cursor:pointer; font-weight:bold; width:auto; margin-top:0;" onclick="removerProdutoTemp(${p.idProd})">✕</button>
@@ -548,7 +550,6 @@
         listaParaMostrar.forEach((amostra, index) => {
             let linhas = '';
             amostra.produtos.forEach(p => {
-                // LÓGICA DO CHECKLIST VISUAL NOVO
                 let isChecked = p.dataRecebido ? 'checked' : '';
                 let labelHTML = p.dataRecebido ? `<span class="data-recebido">Recebido: ${p.dataRecebido}</span>` : '<label>Aguardando</label>';
                 
@@ -597,7 +598,7 @@
         else { produto.dataRecebido = null; } 
         
         await updateDoc(doc(db, "amostras", idAmos), { produtos: amostra.produtos }); 
-        carregarTudo(); // Atualiza a tela para mostrar a data ou esconder
+        carregarTudo();
     }
 
     window.apagarAmostra = async function(id) { if(confirm("Apagar permanentemente?")) { await deleteDoc(doc(db, "amostras", id)); carregarTudo(); } }
