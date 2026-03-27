@@ -10,21 +10,19 @@
            ========================================= */
         body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%); min-height: 100vh; margin: 0; padding-top: 70px; color: #102a43; overflow-x: hidden; }
         
-        /* Barra de topo ajustada para ter botões nos dois lados */
         .topbar { position: fixed; top: 0; left: 0; width: 100%; background: #003e6b; color: white; padding: 15px 20px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; z-index: 900; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         .topbar-esquerda { display: flex; align-items: center; }
         .btn-menu { background: transparent; color: white; border: none; font-size: 24px; cursor: pointer; margin-right: 15px; width: auto; padding: 0 10px; }
         .topbar h1 { margin: 0; font-size: 20px; font-weight: 600; }
         
-        /* Novo botão direito */
         .btn-topo-direito { background: #28a745; color: white; border: 1px solid #218838; border-radius: 6px; padding: 8px 15px; cursor: pointer; font-weight: bold; transition: all 0.3s; font-size: 14px; }
         .btn-topo-direito:hover { background: #218838; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
 
         .container { max-width: 900px; margin: 20px auto; background: #ffffff; padding: 30px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0, 50, 100, 0.08); }
         h2 { color: #003e6b; font-weight: 600; }
         .form-group { display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 20px; }
-        input[type="text"], select { padding: 12px 15px; border: 1px solid #bcccdc; border-radius: 8px; flex: 1; min-width: 150px; font-size: 15px; outline: none; transition: all 0.3s ease; background: white; color: #102a43; }
-        input[type="text"]:focus, select:focus { border-color: #2684ff; box-shadow: 0 0 0 3px rgba(38, 132, 255, 0.2); }
+        input[type="text"], input[type="number"], select { padding: 12px 15px; border: 1px solid #bcccdc; border-radius: 8px; flex: 1; min-width: 150px; font-size: 15px; outline: none; transition: all 0.3s ease; background: white; color: #102a43; }
+        input:focus, select:focus { border-color: #2684ff; box-shadow: 0 0 0 3px rgba(38, 132, 255, 0.2); }
         .erro-input { border: 2px solid #e53e3e !important; background-color: #fff5f5 !important; }
         .texto-asterisco { color: #e53e3e; font-weight: bold; }
         
@@ -39,7 +37,6 @@
         button.btn-secundario { background: linear-gradient(135deg, #627d98, #829ab1); }
         button.btn-editar { background: linear-gradient(135deg, #d69e2e, #ecc94b); color: #744210; margin-top: 5px; }
         
-        /* Botões de Apagar */
         button.btn-apagar { background: linear-gradient(135deg, #e53e3e, #fc8181); color: white; margin-top: 5px; width: auto; padding: 6px 12px; font-size: 12px; }
         .btn-apagar-card { background: #e53e3e !important; margin-top: 5px; }
         .btn-apagar-card:hover { background: #c53030 !important; }
@@ -58,12 +55,11 @@
         .item-produto { display: flex; justify-content: space-between; align-items: center; padding: 8px; border-bottom: 1px solid #d9e2ec; font-size: 14px; }
         .item-produto:last-child { border-bottom: none; }
         .tabela-amostras { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
-        .tabela-amostras th, .tabela-amostras td { border: 1px solid #d9e2ec; padding: 8px; text-align: left; }
+        .tabela-amostras th, .tabela-amostras td { border: 1px solid #d9e2ec; padding: 8px; text-align: left; vertical-align: middle; }
         .tabela-amostras th { background: #e2e8f0; color: #003e6b; }
         .btn-status { width: auto; padding: 4px 8px; font-size: 11px; margin: 2px; }
         .status-ok { color: #28a745; font-weight: bold; }
         
-        /* Menu Lateral */
         .sidebar { position: fixed; top: 0; left: -320px; width: 300px; height: 100%; background: #ffffff; box-shadow: 2px 0 15px rgba(0,0,0,0.2); z-index: 1000; transition: left 0.4s ease; overflow-y: auto; padding: 20px; box-sizing: border-box; }
         .sidebar.aberto { left: 0; }
         .sidebar-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999; }
@@ -77,7 +73,6 @@
         .tela-app { display: none; }
         .tela-ativa { display: block; }
         
-        /* Modal Preview */
         .modal-fundo { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 20, 40, 0.8); z-index: 1100; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; }
         .modal-conteudo { background: white; border-radius: 12px; width: 100%; max-width: 900px; height: 90vh; display: flex; flex-direction: column; overflow: hidden; }
         .modal-cabecalho { padding: 15px 20px; background: #f0f4f8; border-bottom: 1px solid #d9e2ec; display: flex; justify-content: space-between; align-items: center; }
@@ -103,7 +98,7 @@
     <ul>
         <li><button class="link-menu" onclick="mudarTela('telaRelatorios')">📄 Banco de Relatórios</button></li>
         <li><button class="link-menu" onclick="mudarTela('telaAcreditacoes')">🏢 Gerenciar Acreditações</button></li>
-        <li><button class="link-menu" onclick="mudarTela('telaAmostras')">Amostras</button></li>
+        <li><button class="link-menu" onclick="mudarTela('telaAmostras')">📦 Controle de Amostras</button></li>
     </ul>
     <h3>Buscar Acreditação (Links Ext.)</h3>
     <ul>
@@ -182,28 +177,33 @@
 <div id="telaAmostras" class="container tela-app">
     <div class="secao">
         <h2 id="tituloFormAmostra">Controle de Solicitação e Recebimento</h2>
+        <p style="font-size: 13px; color: #666;">Preencha os dados do cliente e processos, depois adicione os produtos (com Tensão e Qtd).</p>
+        
         <div class="form-group">
-            <input type="text" id="amostraProcesso" placeholder="Nº de Processo *">
-            <select id="amostraTipo">
-                <option value="">Tipo de Processo *</option>
-                <option value="Inicial">Inicial</option>
-                <option value="Manutenção">Manutenção</option>
-                <option value="Inclusão">Inclusão</option>
-                <option value="Recertificação">Recertificação</option>
-            </select>
+            <input type="text" id="amostraCliente" placeholder="Nome do Cliente *">
+            <input type="text" id="amostraProcessoABCP" placeholder="Nº de Processo ABCP *">
+            <input type="text" id="amostraProcessoYES" placeholder="Nº de Processo YES *">
         </div>
+
         <div class="lista-produtos">
             <h3 style="margin-top:0; color:#0056b3; font-size:16px;">Adicionar Produtos à Solicitação</h3>
-            <div class="form-group" style="margin-bottom: 10px;">
-                <input type="text" id="amostraProdNome" placeholder="Nome do Produto *" style="flex: 2;">
-                <input type="text" id="amostraProdLink" placeholder="Link (Opcional)" style="flex: 2;">
-                <button onclick="adicionarProdutoTemp()" style="flex: 1; margin-top:0; background: #28a745; box-shadow:none;">+ Add Item</button>
+            
+            <div class="form-group" style="margin-bottom: 10px; gap: 10px;">
+                <input type="text" id="amostraProdNome" placeholder="Nome do Produto *" style="flex: 2; min-width: 120px;">
+                <input type="text" id="amostraProdTensao" placeholder="Tensão *" style="flex: 1; min-width: 80px;">
+                <input type="number" id="amostraProdQtd" placeholder="Qtd *" style="flex: 1; min-width: 70px;">
+                <input type="text" id="amostraProdLink" placeholder="Link (Opcional)" style="flex: 2; min-width: 120px;">
+                
+                <button onclick="adicionarProdutoTemp()" style="flex: 1; margin-top:0; background: #28a745; box-shadow:none; min-width: 100px;">+ Add Item</button>
             </div>
+            
             <div id="listaProdutosTemp"><p style="font-size: 13px; color: #777; font-style: italic;">Nenhum produto adicionado ainda.</p></div>
         </div>
+        
         <button id="btnSalvarAmostra" onclick="salvarAmostra()">Salvar Solicitação de Amostra</button>
         <button id="btnCancelarEdicaoAmostra" class="btn-secundario" style="display:none; margin-top: 10px;" onclick="cancelarEdicaoAmostra()">Cancelar Edição</button>
     </div>
+    
     <h2>Processos de Amostras Cadastrados</h2>
     <div class="cards-container" id="areaCardsAmostras"><p>A carregar da nuvem...</p></div>
 </div>
@@ -219,20 +219,23 @@
 </div>
 
 <script type="module">
+    // Utilizamos os links CDN (via gstatic) para que funcione diretamente no HTML sem precisar de servidores complexos ou terminais.
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
     import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
     import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js";
 
-    // 🔴 COLA AQUI O TEU FIREBASE CONFIG REAL DA TUA CONTA 🔴
+    // 🔴 AS TUAS CHAVES FORAM COLOCADAS AQUI: 🔴
     const firebaseConfig = {
-        apiKey: "SUAS_CHAVES_AQUI",
-        authDomain: "SUAS_CHAVES_AQUI",
-        projectId: "SUAS_CHAVES_AQUI",
-        storageBucket: "SUAS_CHAVES_AQUI",
-        messagingSenderId: "SUAS_CHAVES_AQUI",
-        appId: "SUAS_CHAVES_AQUI"
+        apiKey: "AIzaSyBHUM_UpS2LLDaXXxF83Ofb03xkaB3EQis",
+        authDomain: "gestao-eletro-301d4.firebaseapp.com",
+        projectId: "gestao-eletro-301d4",
+        storageBucket: "gestao-eletro-301d4.firebasestorage.app",
+        messagingSenderId: "33506472467",
+        appId: "1:33506472467:web:1e649443489bbdb9f305e6",
+        measurementId: "G-0YQYFEEDNG"
     };
 
+    // Inicialização do Firebase com as tuas configurações
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
     const storage = getStorage(app);
@@ -287,7 +290,7 @@
             const queryRel = await getDocs(collection(db, "relatorios")); bancoDeDados = queryRel.docs.map(doc => ({ ...doc.data(), id: doc.id })); mostrarCardsRelatorios(bancoDeDados);
             const queryLab = await getDocs(collection(db, "acreditacoes")); bancoAcreditacoes = queryLab.docs.map(doc => ({ ...doc.data(), id: doc.id })); mostrarCardsAcreditacao();
             const queryAmo = await getDocs(collection(db, "amostras")); bancoAmostras = queryAmo.docs.map(doc => ({ ...doc.data(), id: doc.id })); mostrarCardsAmostras();
-        } catch(e) { console.error("Erro ao carregar", e); }
+        } catch(e) { console.error("Erro ao carregar do Firebase. Configuraste as chaves?", e); }
     }
 
     // =========================================
@@ -302,6 +305,7 @@
             if (arquivo) { const arquivoRef = ref(storage, 'relatorios/' + Date.now() + '_' + arquivo.name); await uploadBytes(arquivoRef, arquivo); dados.arquivoUrl = await getDownloadURL(arquivoRef); dados.arquivoNome = arquivo.name; }
             await addDoc(collection(db, "relatorios"), dados); alert("Relatório salvo!");
             document.querySelectorAll('#telaRelatorios .form-group input').forEach(i => i.value = ''); document.getElementById('regClasse').value = ''; carregarTudo();
+            document.getElementById('textoDropRel').innerText = "📄 Arraste e solte o relatório aqui"; document.getElementById('areaDropRel').style.borderColor = "#2684ff"; document.getElementById('areaDropRel').style.color = "#2b6cb0"; document.getElementById('regArquivoRel').value = "";
         } catch(e) { alert("Erro ao salvar."); console.error(e); } finally { btn.innerText = "Salvar Relatório"; btn.disabled = false; }
     }
 
@@ -324,7 +328,12 @@
         mostrarCardsRelatorios(bancoDeDados.filter(i => i.produto.trim().toLowerCase() === fProd && i.modelo.trim().toLowerCase() === fMod && i.classe === fClas && i.tensao.trim().toLowerCase() === fTens && i.potencia.trim().toLowerCase() === fPot));
     }
     window.limparFiltro = function() { ['buscaProduto', 'buscaModelo', 'buscaClasse', 'buscaTensao', 'buscaPotencia'].forEach(id => { document.getElementById(id).value = ''; document.getElementById(id).classList.remove('erro-input'); }); mostrarCardsRelatorios(bancoDeDados); }
-    window.abrirPreview = function(url, titulo) { document.getElementById('tituloModal').innerText = "Visualizando: " + titulo; document.getElementById('telaPreview').src = url; document.getElementById('meuModal').style.display = 'flex'; }
+
+    window.abrirPreview = function(url, titulo) {
+        document.getElementById('tituloModal').innerText = "Visualizando: " + titulo;
+        document.getElementById('telaPreview').src = url;
+        document.getElementById('meuModal').style.display = 'flex';
+    }
 
     // =========================================
     // ACREDITAÇÕES
@@ -332,13 +341,29 @@
     window.salvarAcreditacao = async function() {
         const nome = document.getElementById('regLabNome').value.trim();
         if (!nome) { document.getElementById('regLabNome').classList.add('erro-input'); alert("Nome é obrigatório!"); return; }
+
         const btn = document.getElementById('btnSalvarLab'); btn.innerText = "A guardar..."; btn.disabled = true;
+
         try {
             const dados = { nome: nome, link: document.getElementById('regLabLink').value.trim() };
             const arquivo = document.getElementById('regArquivoLab').files[0];
-            if (arquivo) { const arquivoRef = ref(storage, 'acreditacoes/' + Date.now() + '_' + arquivo.name); await uploadBytes(arquivoRef, arquivo); dados.arquivoUrl = await getDownloadURL(arquivoRef); dados.arquivoNome = arquivo.name; }
-            if (idLabEmEdicao) { await updateDoc(doc(db, "acreditacoes", idLabEmEdicao), dados); alert("Acreditação atualizada!"); } else { await addDoc(collection(db, "acreditacoes"), dados); alert("Acreditação salva!"); }
-            window.cancelarEdicaoLab(); carregarTudo();
+            
+            if (arquivo) {
+                const arquivoRef = ref(storage, 'acreditacoes/' + Date.now() + '_' + arquivo.name);
+                await uploadBytes(arquivoRef, arquivo);
+                dados.arquivoUrl = await getDownloadURL(arquivoRef);
+                dados.arquivoNome = arquivo.name;
+            }
+
+            if (idLabEmEdicao) {
+                await updateDoc(doc(db, "acreditacoes", idLabEmEdicao), dados);
+                alert("Acreditação atualizada!");
+            } else {
+                await addDoc(collection(db, "acreditacoes"), dados);
+                alert("Acreditação salva!");
+            }
+            window.cancelarEdicaoLab();
+            carregarTudo();
         } catch(e) { alert("Erro ao salvar."); console.error(e); } finally { btn.innerText = "Salvar Acreditação"; btn.disabled = false; }
     }
 
@@ -346,7 +371,7 @@
         const area = document.getElementById('areaCardsLab'); area.innerHTML = '';
         if (bancoAcreditacoes.length === 0) { area.innerHTML = '<p>Nenhuma acreditação cadastrada.</p>'; return; }
         bancoAcreditacoes.forEach(lab => {
-            let btnAnexo = lab.arquivoUrl ? `<button class="btn-card" onclick="abrirPreview('${lab.arquivoUrl}', '${lab.nome}')">Visualizar Certificado</button>` : ``;
+            let btnAnexo = lab.arquivoUrl ? `<button class="btn-card" onclick="abrirPreview('${lab.arquivoUrl}', '${lab.nome}')">👁️ Visualizar Certificado</button>` : ``;
             let btnLink = lab.link ? `<a href="${lab.link}" target="_blank" class="btn-card" style="background:#17a2b8;">🔗 Acessar Link</a>` : ``;
             area.innerHTML += `<div class="card"><div style="flex:1;"><h3>${lab.nome}</h3></div>${btnLink}${btnAnexo}<button class="btn-card btn-editar" onclick="editarLab('${lab.id}')">✏️ Editar Info</button><button class="btn-card btn-apagar-card" onclick="apagarLab('${lab.id}')">🗑️ Excluir</button></div>`;
         });
@@ -358,32 +383,69 @@
 
     window.editarLab = function(id) {
         const lab = bancoAcreditacoes.find(i => i.id === id);
-        if(lab) { idLabEmEdicao = id; document.getElementById('regLabNome').value = lab.nome; document.getElementById('regLabLink').value = lab.link || ""; document.getElementById('tituloFormLab').innerText = "A Editar: " + lab.nome; document.getElementById('btnSalvarLab').innerText = "Atualizar Acreditação"; document.getElementById('btnCancelarEdicao').style.display = "block"; window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        if(lab) {
+            idLabEmEdicao = id; document.getElementById('regLabNome').value = lab.nome; document.getElementById('regLabLink').value = lab.link || "";
+            document.getElementById('tituloFormLab').innerText = "A Editar: " + lab.nome; document.getElementById('btnSalvarLab').innerText = "Atualizar Acreditação"; document.getElementById('btnCancelarEdicao').style.display = "block";
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
     }
-    window.cancelarEdicaoLab = function() { idLabEmEdicao = null; document.getElementById('regLabNome').value = ''; document.getElementById('regLabLink').value = ''; document.getElementById('tituloFormLab').innerText = "Cadastrar Nova Acreditação"; document.getElementById('btnSalvarLab').innerText = "Salvar Acreditação"; document.getElementById('btnCancelarEdicao').style.display = "none"; }
+    window.cancelarEdicaoLab = function() {
+        idLabEmEdicao = null; document.getElementById('regLabNome').value = ''; document.getElementById('regLabLink').value = ''; document.getElementById('regArquivoLab').value = '';
+        document.getElementById('textoDropLab').innerText = "📁 Arraste e solte o certificado aqui"; document.getElementById('areaDropLab').style.borderColor = "#2684ff"; document.getElementById('areaDropLab').style.color = "#2b6cb0";
+        document.getElementById('tituloFormLab').innerText = "Cadastrar Nova Acreditação"; document.getElementById('btnSalvarLab').innerText = "Salvar Acreditação"; document.getElementById('btnCancelarEdicao').style.display = "none";
+    }
 
     // =========================================
     // AMOSTRAS
     // =========================================
     window.adicionarProdutoTemp = function() {
         const nome = document.getElementById('amostraProdNome').value.trim();
-        if (!nome) { document.getElementById('amostraProdNome').classList.add('erro-input'); return; }
-        produtosTemp.push({ idProd: Date.now(), nome: nome, link: document.getElementById('amostraProdLink').value.trim(), dataSolicitado: null, dataRecebido: null });
-        document.getElementById('amostraProdNome').value = ''; document.getElementById('amostraProdLink').value = ''; renderizarProdutosTemp();
+        const tensao = document.getElementById('amostraProdTensao').value.trim();
+        const qtd = document.getElementById('amostraProdQtd').value.trim();
+        
+        if (!validarCampos(['amostraProdNome', 'amostraProdTensao', 'amostraProdQtd'])) { return; }
+        
+        produtosTemp.push({ 
+            idProd: Date.now(), 
+            nome: nome, 
+            tensao: tensao,
+            qtd: qtd,
+            link: document.getElementById('amostraProdLink').value.trim(), 
+            dataSolicitado: null, 
+            dataRecebido: null 
+        });
+        
+        document.getElementById('amostraProdNome').value = ''; 
+        document.getElementById('amostraProdTensao').value = ''; 
+        document.getElementById('amostraProdQtd').value = ''; 
+        document.getElementById('amostraProdLink').value = ''; 
+        renderizarProdutosTemp();
     }
+
     window.renderizarProdutosTemp = function() {
         const div = document.getElementById('listaProdutosTemp'); div.innerHTML = '';
         if (produtosTemp.length === 0) { div.innerHTML = '<p style="font-size: 13px; color: #777;">Nenhum produto adicionado ainda.</p>'; return; }
-        produtosTemp.forEach(p => div.innerHTML += `<div class="item-produto"><span><strong>${p.nome}</strong></span><button class="btn-apagar" onclick="removerProdutoTemp(${p.idProd})">X Remover</button></div>`);
+        produtosTemp.forEach(p => div.innerHTML += `<div class="item-produto"><span><strong>${p.qtd}x ${p.nome}</strong> (${p.tensao})</span><button class="btn-apagar" onclick="removerProdutoTemp(${p.idProd})">X Remover</button></div>`);
     }
     window.removerProdutoTemp = function(id) { produtosTemp = produtosTemp.filter(p => p.idProd !== id); renderizarProdutosTemp(); }
 
     window.salvarAmostra = async function() {
-        if (!validarCampos(['amostraProcesso', 'amostraTipo'])) return;
-        if (produtosTemp.length === 0) { alert("Adicione produtos!"); return; }
+        if (!validarCampos(['amostraCliente', 'amostraProcessoABCP', 'amostraProcessoYES'])) return;
+        if (produtosTemp.length === 0) { alert("Adicione produtos à lista!"); return; }
+        
         const btn = document.getElementById('btnSalvarAmostra'); btn.innerText = "A guardar..."; btn.disabled = true;
-        const dados = { processo: document.getElementById('amostraProcesso').value.trim(), tipo: document.getElementById('amostraTipo').value, produtos: produtosTemp };
-        try { if (idAmostraEmEdicao) { await updateDoc(doc(db, "amostras", idAmostraEmEdicao), dados); alert("Solicitação atualizada!"); } else { await addDoc(collection(db, "amostras"), dados); alert("Solicitação salva!"); } window.cancelarEdicaoAmostra(); carregarTudo(); } catch(e) { alert("Erro ao salvar."); console.error(e); } finally { btn.innerText = "Salvar Solicitação"; btn.disabled = false; }
+        const dados = { 
+            cliente: document.getElementById('amostraCliente').value.trim(), 
+            processoABCP: document.getElementById('amostraProcessoABCP').value.trim(),
+            processoYES: document.getElementById('amostraProcessoYES').value.trim(),
+            produtos: produtosTemp 
+        };
+        
+        try { 
+            if (idAmostraEmEdicao) { await updateDoc(doc(db, "amostras", idAmostraEmEdicao), dados); alert("Solicitação atualizada!"); } 
+            else { await addDoc(collection(db, "amostras"), dados); alert("Solicitação salva!"); } 
+            window.cancelarEdicaoAmostra(); carregarTudo(); 
+        } catch(e) { alert("Erro ao salvar."); console.error(e); } finally { btn.innerText = "Salvar Solicitação de Amostra"; btn.disabled = false; }
     }
 
     function mostrarCardsAmostras() {
@@ -393,22 +455,77 @@
             let linhas = '';
             amostra.produtos.forEach(p => {
                 let statusInfo = !p.dataSolicitado ? `<button class="btn-status" onclick="marcarStatus('${amostra.id}', ${p.idProd}, 'solicitado')">Solicitar</button>` : (!p.dataRecebido ? `<span class="status-ok">Solicitado: ${p.dataSolicitado}</span><br><button class="btn-status" style="background:#28a745;" onclick="marcarStatus('${amostra.id}', ${p.idProd}, 'recebido')">Receber</button>` : `<span class="status-ok">Solicitado: ${p.dataSolicitado}</span><br><span class="status-ok" style="color:#17a2b8;">Recebido: ${p.dataRecebido}</span>`);
-                linhas += `<tr><td>${p.nome}</td><td style="text-align:center;">${statusInfo}</td></tr>`;
+                linhas += `<tr>
+                    <td><strong>${p.nome}</strong><br><small style="color:#666;">Qtd: ${p.qtd} | Tensão: ${p.tensao}</small> ${p.link ? `<br><a href="${p.link}" target="_blank" style="font-size:11px;">Acessar Link</a>` : ''}</td>
+                    <td style="text-align:center; vertical-align:middle;">${statusInfo}</td>
+                </tr>`;
             });
-            area.innerHTML += `<div class="card card-largo"><h3>Processo: ${amostra.processo} <span style="font-size:14px; color:#555;">(${amostra.tipo})</span></h3><table class="tabela-amostras"><thead><tr><th>Produto</th><th>Status</th></tr></thead><tbody>${linhas}</tbody></table><div style="display:flex; gap:10px; margin-top:15px;"><button class="btn-card" style="background:#17a2b8;" onclick="marcarTodosRecebidos('${amostra.id}')">✅ Receber Todos</button><button class="btn-card btn-editar" onclick="editarAmostra('${amostra.id}')">✏️ Editar Info</button><button class="btn-card btn-apagar-card" onclick="apagarAmostra('${amostra.id}')">🗑️ Excluir</button></div></div>`;
+            area.innerHTML += `
+                <div class="card card-largo">
+                    <h3 style="margin-bottom:5px;">Cliente: ${amostra.cliente}</h3>
+                    <p style="margin-top:0; font-size:13px;"><strong>ABCP:</strong> ${amostra.processoABCP} | <strong>YES:</strong> ${amostra.processoYES}</p>
+                    <table class="tabela-amostras"><thead><tr><th>Produto</th><th>Status</th></tr></thead><tbody>${linhas}</tbody></table>
+                    <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:15px;">
+                        <button class="btn-card" style="background:#17a2b8; flex:1; min-width:120px;" onclick="marcarTodosRecebidos('${amostra.id}')">✅ Receber Todos</button>
+                        <button class="btn-card btn-editar" style="flex:1; min-width:100px;" onclick="editarAmostra('${amostra.id}')">✏️ Editar Info</button>
+                        <button class="btn-card btn-apagar-card" style="flex:1; min-width:100px;" onclick="apagarAmostra('${amostra.id}')">🗑️ Excluir</button>
+                    </div>
+                </div>`;
         });
     }
 
-    window.apagarAmostra = async function(id) {
-        if(confirm("Tem certeza que deseja apagar esta amostra permanentemente?")) { await deleteDoc(doc(db, "amostras", id)); alert("Apagado com sucesso!"); carregarTudo(); }
+    window.apagarAmostra = async function(id) { if(confirm("Tem certeza que deseja apagar esta amostra permanentemente?")) { await deleteDoc(doc(db, "amostras", id)); alert("Apagado com sucesso!"); carregarTudo(); } }
+    
+    window.marcarStatus = async function(idAmos, idProd, acao) { 
+        const dataHoje = new Date().toLocaleDateString('pt-BR'); 
+        const amostra = bancoAmostras.find(a => a.id === idAmos); 
+        const produto = amostra.produtos.find(p => p.idProd === idProd); 
+        if (acao === 'solicitado') produto.dataSolicitado = dataHoje; 
+        if (acao === 'recebido') produto.dataRecebido = dataHoje; 
+        await updateDoc(doc(db, "amostras", idAmos), { produtos: amostra.produtos }); 
+        carregarTudo(); 
     }
 
-    window.marcarStatus = async function(idAmos, idProd, acao) { const dataHoje = new Date().toLocaleDateString('pt-BR'); const amostra = bancoAmostras.find(a => a.id === idAmos); const produto = amostra.produtos.find(p => p.idProd === idProd); if (acao === 'solicitado') produto.dataSolicitado = dataHoje; if (acao === 'recebido') produto.dataRecebido = dataHoje; await updateDoc(doc(db, "amostras", idAmos), { produtos: amostra.produtos }); carregarTudo(); }
-    window.marcarTodosRecebidos = async function(idAmos) { if(confirm("Marcar TODOS como Recebidos?")) { const dataHoje = new Date().toLocaleDateString('pt-BR'); const amostra = bancoAmostras.find(a => a.id === idAmos); amostra.produtos.forEach(p => { if (!p.dataSolicitado) p.dataSolicitado = dataHoje; if (!p.dataRecebido) p.dataRecebido = dataHoje; }); await updateDoc(doc(db, "amostras", idAmos), { produtos: amostra.produtos }); carregarTudo(); } }
-    window.editarAmostra = function(id) { const am = bancoAmostras.find(i => i.id === id); if(am) { idAmostraEmEdicao = id; document.getElementById('amostraProcesso').value = am.processo; document.getElementById('amostraTipo').value = am.tipo; produtosTemp = JSON.parse(JSON.stringify(am.produtos)); renderizarProdutosTemp(); document.getElementById('tituloFormAmostra').innerText = "A Editar: " + am.processo; document.getElementById('btnSalvarAmostra').innerText = "Atualizar"; document.getElementById('btnCancelarEdicaoAmostra').style.display = "block"; window.scrollTo({ top: 0, behavior: 'smooth' }); } }
-    window.cancelarEdicaoAmostra = function() { idAmostraEmEdicao = null; document.getElementById('amostraProcesso').value = ''; document.getElementById('amostraTipo').value = ''; produtosTemp = []; renderizarProdutosTemp(); document.getElementById('tituloFormAmostra').innerText = "Controle de Solicitação e Recebimento"; document.getElementById('btnSalvarAmostra').innerText = "Salvar Solicitação"; document.getElementById('btnCancelarEdicaoAmostra').style.display = "none"; }
+    window.marcarTodosRecebidos = async function(idAmos) { 
+        if(confirm("Marcar TODOS os produtos desta amostra como Recebidos?")) { 
+            const dataHoje = new Date().toLocaleDateString('pt-BR'); 
+            const amostra = bancoAmostras.find(a => a.id === idAmos); 
+            amostra.produtos.forEach(p => { 
+                if (!p.dataSolicitado) p.dataSolicitado = dataHoje; 
+                if (!p.dataRecebido) p.dataRecebido = dataHoje; 
+            }); 
+            await updateDoc(doc(db, "amostras", idAmos), { produtos: amostra.produtos }); 
+            carregarTudo(); 
+        } 
+    }
+    
+    window.editarAmostra = function(id) { 
+        const am = bancoAmostras.find(i => i.id === id); 
+        if(am) { 
+            idAmostraEmEdicao = id; 
+            document.getElementById('amostraCliente').value = am.cliente; 
+            document.getElementById('amostraProcessoABCP').value = am.processoABCP; 
+            document.getElementById('amostraProcessoYES').value = am.processoYES; 
+            produtosTemp = JSON.parse(JSON.stringify(am.produtos)); renderizarProdutosTemp(); 
+            document.getElementById('tituloFormAmostra').innerText = "A Editar Processo: " + am.cliente; 
+            document.getElementById('btnSalvarAmostra').innerText = "Atualizar Solicitação"; 
+            document.getElementById('btnCancelarEdicaoAmostra').style.display = "block"; 
+            window.scrollTo({ top: 0, behavior: 'smooth' }); 
+        } 
+    }
 
-    // CARREGA TUDO AO INICIAR A PÁGINA
+    window.cancelarEdicaoAmostra = function() { 
+        idAmostraEmEdicao = null; 
+        document.getElementById('amostraCliente').value = ''; 
+        document.getElementById('amostraProcessoABCP').value = ''; 
+        document.getElementById('amostraProcessoYES').value = ''; 
+        produtosTemp = []; renderizarProdutosTemp(); 
+        document.getElementById('tituloFormAmostra').innerText = "Controle de Solicitação e Recebimento"; 
+        document.getElementById('btnSalvarAmostra').innerText = "Salvar Solicitação de Amostra"; 
+        document.getElementById('btnCancelarEdicaoAmostra').style.display = "none"; 
+    }
+
+    // CARREGA TUDO AO INICIAR A PÁGINA (Comunica com a nuvem)
     carregarTudo();
 </script>
 
