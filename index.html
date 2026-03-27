@@ -96,9 +96,9 @@
     <button class="btn-fechar-menu" onclick="toggleMenu()">X Fechar Menu</button>
     <h3>Navegação do Sistema</h3>
     <ul>
-        <li><button class="link-menu" onclick="mudarTela('telaRelatorios')">📄 Banco de Relatórios</button></li>
-        <li><button class="link-menu" onclick="mudarTela('telaAcreditacoes')">🏢 Gerenciar Acreditações</button></li>
-        <li><button class="link-menu" onclick="mudarTela('telaAmostras')">📦 Controle de Amostras</button></li>
+        <li><button class="link-menu" onclick="mudarTela('telaRelatorios')">Relatórios de Ensaios</button></li>
+        <li><button class="link-menu" onclick="mudarTela('telaAcreditacoes')">Gerenciar Acreditações</button></li>
+        <li><button class="link-menu" onclick="mudarTela('telaAmostras')">Controle de Amostras</button></li>
     </ul>
     <h3>Buscar Acreditação (Links Ext.)</h3>
     <ul>
@@ -164,7 +164,7 @@
             <input type="text" id="regLabLink" placeholder="Link de Consulta (Opcional)">
         </div>
         <div class="drop-zone" id="areaDropLab">
-            <span id="textoDropLab">📁 Arraste e solte o certificado aqui</span>
+            <span id="textoDropLab">Arraste e solte o certificado aqui</span>
             <input type="file" id="regArquivoLab" class="input-escondido" accept=".pdf,.jpg,.jpeg,.png">
         </div>
         <button id="btnSalvarLab" onclick="salvarAcreditacao()">Salvar Acreditação</button>
@@ -344,7 +344,7 @@
         const area = document.getElementById('areaCardsLab'); area.innerHTML = '';
         if (bancoAcreditacoes.length === 0) { area.innerHTML = '<p>Nenhuma acreditação cadastrada.</p>'; return; }
         bancoAcreditacoes.forEach(lab => {
-            let btnAnexo = lab.arquivoUrl ? `<button class="btn-card" onclick="abrirPreview('${lab.arquivoUrl}', '${lab.nome}')">👁️ Visualizar Certificado</button>` : ``;
+            let btnAnexo = lab.arquivoUrl ? `<button class="btn-card" onclick="abrirPreview('${lab.arquivoUrl}', '${lab.nome}')">Visualizar Certificado</button>` : ``;
             let btnLink = lab.link ? `<a href="${lab.link}" target="_blank" class="btn-card" style="background:#17a2b8;">🔗 Acessar Link</a>` : ``;
             area.innerHTML += `<div class="card"><div style="flex:1;"><h3>${lab.nome}</h3></div>${btnLink}${btnAnexo}<button class="btn-card btn-editar" onclick="editarLab('${lab.id}')">✏️ Editar Info</button><button class="btn-card btn-apagar-card" onclick="apagarLab('${lab.id}')">🗑️ Excluir</button></div>`;
         });
