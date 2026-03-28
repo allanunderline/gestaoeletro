@@ -50,7 +50,7 @@
         @keyframes slideUpFadePage { from { opacity: 0; transform: translateY(40px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
         @keyframes popInCard { from { opacity: 0; transform: scale(0.8) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
 
-        /* Topbar Clean e Vibrante */
+        /* Topbar */
         .topbar { position: fixed; top: 0; left: 0; width: 100%; background: var(--gradient-primary); color: white; padding: 12px 20px; box-sizing: border-box; display: flex; align-items: center; justify-content: space-between; z-index: 900; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
         .topbar-esquerda { display: flex; align-items: center; }
         .topbar-direita { display: flex; align-items: center; gap: 15px; }
@@ -59,33 +59,56 @@
         .btn-menu:hover { transform: rotate(90deg); }
         .topbar h1 { margin: 0; font-size: 19px; font-weight: 600; letter-spacing: 0.5px; }
         
-        /* Botão Tema e Botão Amostras no Topo */
+        /* Botão Tema */
         .btn-tema { background: transparent; border: none; font-size: 22px; cursor: pointer; color: white; transition: transform 0.3s; padding: 5px; }
         .btn-tema:hover { transform: scale(1.1); }
         
-        /* O NOVO BOTÃO DE AMOSTRAS MEGA EVIDENTE */
+        /* =========================================
+           O NOVO BOTÃO MEGA EVIDENTE (GHOST GRADIENT)
+           ========================================= */
         .btn-topo-direito { 
-            background: linear-gradient(135deg, #f59e0b, #ea580c); 
-            color: white; 
-            border: 2px solid rgba(253, 230, 138, 0.5); 
+            position: relative;
+            /* Fundo branco (claro) e borda gradiente */
+            background: linear-gradient(#ffffff, #ffffff) padding-box, 
+                        linear-gradient(135deg, #7c3aed, #c084fc) border-box; 
+            border: 2px solid transparent; 
             border-radius: 8px; 
-            padding: 10px 24px; 
+            padding: 8px 24px; 
             cursor: pointer; 
-            font-weight: 700; 
+            font-weight: 800; 
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
             font-size: 16px; 
-            box-shadow: 0 4px 15px rgba(234, 88, 12, 0.4);
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             display: flex;
             align-items: center;
             gap: 8px;
         }
-        .btn-topo-direito:hover { 
-            background: linear-gradient(135deg, #fbbf24, #ea580c); 
-            transform: scale(1.05) translateY(-2px); 
-            box-shadow: 0 8px 25px rgba(234, 88, 12, 0.6); 
-            border-color: rgba(253, 230, 138, 0.8);
+        
+        /* Texto gradiente roxo no modo claro */
+        .btn-topo-direito span {
+            background: linear-gradient(135deg, #6d28d9, #4338ca);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: all 0.3s ease;
         }
+
+        /* Hover no Botão */
+        .btn-topo-direito:hover { 
+            transform: scale(1.05) translateY(-2px); 
+            box-shadow: 0 8px 25px rgba(124, 58, 237, 0.5); 
+        }
+
+        /* Adaptação do Botão para o MODO ESCURO */
+        body:not(.light-mode) .btn-topo-direito {
+            background: linear-gradient(#0c0f2b, #0c0f2b) padding-box, 
+                        linear-gradient(135deg, #c084fc, #7c3aed) border-box; 
+        }
+        body:not(.light-mode) .btn-topo-direito span {
+            background: linear-gradient(135deg, #ffffff, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        /* ========================================= */
 
         /* Container e Seções */
         .container { max-width: 950px; margin: 20px auto; padding: 0 20px; }
@@ -96,7 +119,7 @@
         
         .form-group { display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 20px; }
         
-        /* Inputs com Efeitos de Glow e Rótulo Flutuante */
+        /* Inputs */
         .input-wrapper { position: relative; flex: 1; min-width: 150px; }
         .input-wrapper input, .input-wrapper select { width: 100%; box-sizing: border-box; padding: 15px 15px 5px 15px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 14px; outline: none; transition: all 0.3s ease; background: var(--input-bg); color: var(--text-main); height: 50px; }
         
@@ -107,21 +130,21 @@
         .input-wrapper input:focus, .input-wrapper select:focus { border-color: #7c3aed; background: var(--input-bg); box-shadow: 0 0 10px rgba(124, 58, 237, 0.2); }
         .erro-input { border-color: #ef4444 !important; box-shadow: 0 0 10px rgba(239, 68, 68, 0.3) !important; }
         
-        /* Área de Drag and Drop */
+        /* Drag and Drop */
         .drop-zone { width: 100%; padding: 25px; border: 2px dashed var(--border-color); border-radius: 10px; background-color: var(--input-bg); text-align: center; color: var(--text-muted); cursor: pointer; transition: all 0.3s; box-sizing: border-box; font-size: 14px; margin-bottom: 20px; font-weight: 500; }
         .drop-zone.dragover { background-color: rgba(37, 99, 235, 0.05); border-color: #3b82f6; color: #3b82f6; }
         .input-escondido { display: none; }
         
-        /* BOTÕES */
-        button { padding: 14px 22px; background: var(--gradient-primary); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 15px; transition: all 0.3s ease; width: 100%; margin-top: 8px; box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2); position: relative; overflow: hidden; }
-        button:hover { background: var(--gradient-hover); transform: translateY(-3px); box-shadow: 0 8px 20px rgba(124, 58, 237, 0.4); }
-        button:active { transform: translateY(-1px); }
+        /* BOTÕES GERAIS */
+        button.btn-padrao { padding: 14px 22px; background: var(--gradient-primary); color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 15px; transition: all 0.3s ease; width: 100%; margin-top: 8px; box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2); position: relative; overflow: hidden; }
+        button.btn-padrao:hover { background: var(--gradient-hover); transform: translateY(-3px); box-shadow: 0 8px 20px rgba(124, 58, 237, 0.4); }
+        button.btn-padrao:active { transform: translateY(-1px); }
 
         .botoes-filtro { display: flex; gap: 15px; width: 100%; margin-top: 15px; }
         .botoes-filtro button { margin-top: 0; width: auto; flex: 1; }
         button.btn-secundario { background: #64748b; box-shadow: none; }
         button.btn-secundario:hover { background: #475569; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        button.btn-editar-item { background: #f59e0b; color: white; margin-top: 0; width: auto; padding: 6px 12px; font-size: 12px; box-shadow: none; }
+        button.btn-editar-item { background: #f59e0b; color: white; margin-top: 0; width: auto; padding: 6px 12px; font-size: 12px; border: none; border-radius: 6px; cursor: pointer; }
         button.btn-editar-item:hover { background: #d97706; box-shadow: 0 4px 10px rgba(217, 119, 6, 0.3); }
 
         /* Cartões */
@@ -133,7 +156,7 @@
         .card h3 { margin-top: 0; color: var(--text-main); font-size: 17px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; margin-bottom: 15px; padding-right: 30px; }
         .card p { margin: 8px 0; font-size: 13px; color: var(--text-muted); }
         
-        .btn-card { display: block; width: 100%; margin-top: 12px; text-align: center; background: var(--input-bg); color: var(--text-main); border: 1px solid var(--border-color); padding: 10px 0; font-size: 13px; border-radius: 6px; text-decoration: none; font-weight: 500; cursor: pointer; transition: all 0.3s; box-shadow: none; }
+        .btn-card { display: block; width: 100%; margin-top: 12px; text-align: center; background: var(--input-bg); color: var(--text-main); border: 1px solid var(--border-color); padding: 10px 0; font-size: 13px; border-radius: 6px; text-decoration: none; font-weight: 500; cursor: pointer; transition: all 0.3s; }
         .btn-card:hover { background: rgba(37, 99, 235, 0.1); color: #3b82f6; border-color: #3b82f6; transform: translateY(-2px); }
         .btn-card-azul { background: rgba(37, 99, 235, 0.1); color: #3b82f6; border-color: rgba(59, 130, 246, 0.3); }
 
@@ -164,8 +187,8 @@
         .sidebar ul { list-style: none; padding: 0; margin: 0; }
         .sidebar ul li a, .sidebar ul li button.link-menu { color: var(--text-main); text-decoration: none; font-weight: 500; font-size: 14px; display: block; padding: 12px 15px; background: transparent; border-radius: 8px; border: none; width: 100%; text-align: left; cursor: pointer; transition: all 0.2s; }
         .sidebar ul li a:hover, .sidebar ul li button.link-menu:hover { background: var(--input-bg); color: #3b82f6; }
-        .btn-fechar-menu { background: rgba(239, 68, 68, 0.1); color: #ef4444; margin-bottom: 30px; border: 1px solid rgba(239, 68, 68, 0.2); box-shadow: none; }
-        .btn-fechar-menu:hover { background: rgba(239, 68, 68, 0.2); transform: none; box-shadow: none; }
+        .btn-fechar-menu { background: rgba(239, 68, 68, 0.1); color: #ef4444; margin-bottom: 30px; border: 1px solid rgba(239, 68, 68, 0.2); cursor: pointer; padding: 10px; border-radius: 8px; width: 100%; }
+        .btn-fechar-menu:hover { background: rgba(239, 68, 68, 0.2); }
         
         .tela-app { display: none; }
         .tela-ativa { display: block; animation: slideUpFadePage 0.6s cubic-bezier(0.23, 1, 0.320, 1) forwards; }
@@ -174,7 +197,7 @@
         .modal-fundo { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 1100; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; backdrop-filter: blur(5px); }
         .modal-conteudo { background: var(--modal-bg); border-radius: 12px; width: 100%; max-width: 950px; height: 90vh; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); border: 1px solid var(--border-color); }
         .modal-cabecalho { padding: 18px 22px; background: var(--panel-bg); border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; }
-        .btn-fechar { background: var(--input-bg); color: var(--text-main); border: 1px solid var(--border-color); padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 13px; width: auto; margin: 0; font-weight: 500; box-shadow: none; }
+        .btn-fechar { background: var(--input-bg); color: var(--text-main); border: 1px solid var(--border-color); padding: 8px 16px; border-radius: 6px; cursor: pointer; font-size: 13px; width: auto; margin: 0; font-weight: 500; }
         .btn-fechar:hover { background: rgba(239, 68, 68, 0.1); color: #ef4444; border-color: rgba(239, 68, 68, 0.3); }
         iframe { width: 100%; flex: 1; border: none; background: #e2e8f0; }
     </style>
@@ -188,7 +211,11 @@
     </div>
     <div class="topbar-direita">
         <button id="btnTema" class="btn-tema" onclick="alternarTema()" title="Mudar Tema">☀️</button>
-        <button class="btn-topo-direito" onclick="mudarTela('telaAmostras')">Amostras</button>
+        
+        <button class="btn-topo-direito" onclick="mudarTela('telaAmostras')">
+             <span>Amostras</span>
+        </button>
+        
     </div>
 </div>
 
@@ -198,9 +225,9 @@
     <button class="btn-fechar-menu" onclick="toggleMenu()">Fechar Menu ✕</button>
     <h3>Sistema</h3>
     <ul>
-        <li><button class="link-menu" onclick="mudarTela('telaRelatorios')">📄 Banco de Relatórios</button></li>
-        <li><button class="link-menu" onclick="mudarTela('telaAcreditacoes')">🏢 Gerenciar Acreditações</button></li>
-        <li><button class="link-menu" onclick="mudarTela('telaAmostras')">📦 Controle de Amostras</button></li>
+        <li><button class="link-menu" onclick="mudarTela('telaRelatorios')">Banco de Relatórios</button></li>
+        <li><button class="link-menu" onclick="mudarTela('telaAcreditacoes')">Gerenciar Acreditações</button></li>
+        <li><button class="link-menu" onclick="mudarTela('telaAmostras')">Controle de Amostras</button></li>
     </ul>
     <h3>Acreditações Externas</h3>
     <ul>
@@ -236,7 +263,7 @@
             <span id="textoDropRel">📄 Arraste e solte o relatório aqui</span>
             <input type="file" id="regArquivoRel" class="input-escondido" accept=".pdf,.jpg,.jpeg,.png">
         </div>
-        <button id="btnSalvarRel" onclick="salvarRelatorio()">Salvar Relatório</button>
+        <button class="btn-padrao" id="btnSalvarRel" onclick="salvarRelatorio()">Salvar Relatório</button>
     </div>
     
     <div class="secao">
@@ -257,8 +284,8 @@
             <div class="input-wrapper"><input type="text" id="buscaPotencia" placeholder=" "><label for="buscaPotencia">Potência</label></div>
         </div>
         <div class="botoes-filtro">
-            <button onclick="filtrarRelatorios()">Pesquisar</button>
-            <button class="btn-secundario" onclick="limparFiltro()">Limpar</button>
+            <button class="btn-padrao" onclick="filtrarRelatorios()">Pesquisar</button>
+            <button class="btn-padrao btn-secundario" onclick="limparFiltro()">Limpar</button>
         </div>
     </div>
     
@@ -274,11 +301,11 @@
             <div class="input-wrapper"><input type="text" id="regLabLink" placeholder=" "><label for="regLabLink">Link de Consulta (Opcional)</label></div>
         </div>
         <div class="drop-zone" id="areaDropLab">
-            <span id="textoDropLab">📁 Arraste e solte o certificado aqui</span>
+            <span id="textoDropLab">Arraste e solte o certificado aqui</span>
             <input type="file" id="regArquivoLab" class="input-escondido" accept=".pdf,.jpg,.jpeg,.png">
         </div>
-        <button id="btnSalvarLab" onclick="salvarAcreditacao()">Salvar Acreditação</button>
-        <button id="btnCancelarEdicao" class="btn-secundario" style="display:none;" onclick="cancelarEdicaoLab()">Cancelar Edição</button>
+        <button class="btn-padrao" id="btnSalvarLab" onclick="salvarAcreditacao()">Salvar Acreditação</button>
+        <button class="btn-padrao btn-secundario" id="btnCancelarEdicao" style="display:none;" onclick="cancelarEdicaoLab()">Cancelar Edição</button>
     </div>
     <h2 style="border:none;">Laboratórios Cadastrados</h2>
     <div class="cards-container" id="areaCardsLab"><p style="color:var(--text-muted);">A carregar da nuvem...</p></div>
@@ -301,13 +328,13 @@
                 <div class="input-wrapper" style="flex: 1; min-width: 70px;"><input type="text" id="amostraProdTensao" placeholder=" "><label for="amostraProdTensao">Tensão *</label></div>
                 <div class="input-wrapper" style="flex: 1; min-width: 60px;"><input type="number" id="amostraProdQtd" placeholder=" "><label for="amostraProdQtd">Qtd *</label></div>
                 <div class="input-wrapper" style="flex: 2; min-width: 100px;"><input type="text" id="amostraProdLink" placeholder=" "><label for="amostraProdLink">Link (Opcional)</label></div>
-                <button id="btnAdicionarProduto" onclick="adicionarProdutoTemp()" style="flex: 1; min-width: 90px; margin-top:0;">+ Add</button>
+                <button class="btn-padrao" id="btnAdicionarProduto" onclick="adicionarProdutoTemp()" style="flex: 1; min-width: 90px; margin-top:0;">+ Add</button>
             </div>
             <div id="listaProdutosTemp"><p style="font-size: 13px; color: var(--text-muted); font-style: italic;">Nenhum produto adicionado.</p></div>
         </div>
         
-        <button id="btnSalvarAmostra" onclick="salvarAmostra()">Salvar Solicitação</button>
-        <button id="btnCancelarEdicaoAmostra" class="btn-secundario" style="display:none;" onclick="cancelarEdicaoAmostra()">Cancelar Edição</button>
+        <button class="btn-padrao" id="btnSalvarAmostra" onclick="salvarAmostra()">Salvar Solicitação</button>
+        <button class="btn-padrao btn-secundario" id="btnCancelarEdicaoAmostra" style="display:none;" onclick="cancelarEdicaoAmostra()">Cancelar Edição</button>
     </div>
     
     <div class="secao">
@@ -317,8 +344,8 @@
             <div class="input-wrapper"><input type="text" id="buscaAmProcesso" placeholder=" "><label for="buscaAmProcesso">Filtrar por Proc. (ABCP ou YES)</label></div>
         </div>
         <div class="botoes-filtro">
-            <button onclick="filtrarAmostras()">Pesquisar</button>
-            <button class="btn-secundario" onclick="limparFiltroAmostras()">Limpar</button>
+            <button class="btn-padrao" onclick="filtrarAmostras()">Pesquisar</button>
+            <button class="btn-padrao btn-secundario" onclick="limparFiltroAmostras()">Limpar</button>
         </div>
     </div>
 
@@ -377,7 +404,7 @@
         document.getElementById('btnTema').innerText = '🌙';
     }
 
-    // NAVEGAÇÃO
+    // NAVEGAÇÃO E UTLIDADES
     window.toggleMenu = function() {
         const menu = document.getElementById('menuLateral');
         const overlay = document.getElementById('overlayMenu');
@@ -435,7 +462,7 @@
             if (arquivo) { const arquivoRef = ref(storage, 'relatorios/' + Date.now() + '_' + arquivo.name); await uploadBytes(arquivoRef, arquivo); dados.arquivoUrl = await getDownloadURL(arquivoRef); dados.arquivoNome = arquivo.name; }
             await addDoc(collection(db, "relatorios"), dados); alert("Salvo!");
             document.querySelectorAll('#telaRelatorios .form-group input').forEach(i => i.value = ''); document.getElementById('regClasse').value = ''; carregarTudo();
-            document.getElementById('textoDropRel').innerText = "📄 Arraste e solte o relatório aqui"; document.getElementById('areaDropRel').style.borderColor = "var(--border-color)"; document.getElementById('areaDropRel').style.color = "var(--text-muted)"; document.getElementById('regArquivoRel').value = "";
+            document.getElementById('textoDropRel').innerText = "Arraste e solte o relatório aqui"; document.getElementById('areaDropRel').style.borderColor = "var(--border-color)"; document.getElementById('areaDropRel').style.color = "var(--text-muted)"; document.getElementById('regArquivoRel').value = "";
         } catch(e) { alert("Erro ao salvar."); } finally { btn.innerText = "Salvar Relatório"; btn.disabled = false; }
     }
 
